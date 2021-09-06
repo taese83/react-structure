@@ -1,0 +1,52 @@
+@font-face {
+  font-family: 'NanumSquareEB';
+  src: url(NanumSquareEB.woff2) format('woff2');
+  src: url(NanumSquareEB.eot) format('embedded-opentype'),
+    url(NanumSquareEB.woff) format('woff'),
+    url(NanumSquareOTF_acEB.otf) format('opentype'),
+    url(NanumSquareEB.ttf) format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: 'NanumSquareB';
+  src: url(NanumSquareB.woff2) format('woff2');
+  src: url(NanumSquareB.eot) format('embedded-opentype'),
+    url(NanumSquareB.woff) format('woff'),
+    url(NanumSquareOTF_acB.otf) format('opentype'),
+    url(NanumSquareB.ttf) format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: 'NanumSquareR';
+  src: url(NanumSquareR.woff2) format('woff2');
+  src: url(NanumSquareR.eot) format('embedded-opentype'),
+    url(NanumSquareR.woff) format('woff'),
+    url(NanumSquareOTF_acR.otf) format('opentype'),
+    url(NanumSquareR.ttf) format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: 'NanumSquareL';
+  src: url(NanumSquareL.woff2) format('woff2');
+  src: url(NanumSquareL.eot) format('embedded-opentype'),
+    url(NanumSquareL.woff) format('woff'),
+    url(NanumSquareOTF_acL.otf) format('opentype'),
+    url(NanumSquareL.ttf) format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  font-style: normal;
+  font-stretch: normal;
+}
