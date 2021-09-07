@@ -16,7 +16,7 @@ const display = ({
   ${overflowY ? `overflow-y : ${overflowY};` : ''}
   ${textOverflow ? `text-overflow : ${textOverflow};` : ''}
   ${visibility ? `visibility : ${visibility};` : ''}
-  ${whiteSpace ? `whiteSpace : ${whiteSpace};` : ''}
+  ${whiteSpace ? `white-space : ${whiteSpace};` : ''}
   `;
 
 display.propTypes = {

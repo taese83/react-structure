@@ -1,5 +1,5 @@
-import { all, put, takeLatest, takeEvery } from 'redux-saga/effects';
-import { init, idle, webAction, complete } from './slice';
+import { all, put, takeLatest } from 'redux-saga/effects';
+import { init, idle, complete } from './slice';
 
 function* initTask(actions) {
   yield put(complete());

@@ -10,7 +10,7 @@ const space = ({
   paddingTop,
   paddingRight,
   paddingBottom,
-  paddingleft,
+  paddingLeft,
 }) => `
   ${margin ? `margin : ${margin};` : ''}
   ${marginTop ? `margin-top : ${marginTop};` : ''}
@@ -21,7 +21,7 @@ const space = ({
   ${paddingTop ? `padding-top : ${paddingTop};` : ''}
   ${paddingRight ? `padding-right : ${paddingRight};` : ''}
   ${paddingBottom ? `padding-bottom : ${paddingBottom};` : ''}
-  ${paddingleft ? `padding-left : ${paddingleft};` : ''}
+  ${paddingLeft ? `padding-left : ${paddingLeft};` : ''}
 `;
 
 space.propTypes = {
@@ -34,7 +34,7 @@ space.propTypes = {
   paddingTop: PropTypes.string,
   paddingRight: PropTypes.string,
   paddingBottom: PropTypes.string,
-  paddingleft: PropTypes.string,
+  paddingLeft: PropTypes.string,
 };
 
 export default space;
