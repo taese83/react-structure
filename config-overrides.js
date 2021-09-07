@@ -2,6 +2,9 @@ module.exports = {
   webpack(config) {
     const conf = config;
 
+    conf.entry = {
+      main: ['index.jsx', 'components/index.js'],
+    };
     // 번들 파일형식 지정
     conf.output.filename = '[name].[hash:8].bundle.js';
     conf.output.chunkFilename = '[name].[hash:8].bundle.js';

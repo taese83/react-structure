@@ -20,6 +20,7 @@ const center = ({ center }) =>
 const BoxContainer = styled.div`
   display: flex;
   position: relative;
+  align-items: flex-start;
   box-sizing: border-box;
   ${display}
   ${position}
