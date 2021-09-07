@@ -15,6 +15,15 @@ const Home = () => {
         <Box margin="5px">
           <button
             onClick={() => {
+              go('setting');
+            }}
+          >
+            Setting
+          </button>
+        </Box>
+        <Box margin="5px">
+          <button
+            onClick={() => {
               go('detail', { id: 1 });
             }}
           >
