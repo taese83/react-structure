@@ -7,7 +7,6 @@ const saga = lazy(() => import('./stores/saga'));
 const routes = [
   {
     path: 'setting',
-    params: '',
     component: Setting,
     stores: [
       {

@@ -14,9 +14,15 @@ const generateRoutes = (routes) => {
       route.path?.charAt(route.path.length - 1) === '/'
         ? route.path.slice(0, -1)
         : route.path;
-    const paramKeys = route.params
-      ? route.params.replace(/\?/g, '').split('/:').slice(1)
-      : [];
+    const pks = route.params ? route.params.split('/:').slice(1) : [];
+    const paramKeys = pks.map((param) => {
+      const key = param.replace('?', '');
+      const optional = /.+\?$/.test(param);
+      return {
+        key,
+        optional,
+      };
+    });
 
     const component = loadable(() => {
       const stores = route.stores || [];
@@ -64,11 +70,15 @@ const extractPath = (path, params) => {
   if (!route) return;
 
   let getParams = {};
-  route.paramKeys.forEach((key) => {
-    getParams[key] = params[key] || EMPTY_PARAM;
+  route.paramKeys.forEach(({ key, optional }) => {
+    getParams[key] = params[key] || (optional ? EMPTY_PARAM : null);
   });
 
-  return generatePath(route.path, getParams);
+  try {
+    return generatePath(route.path, getParams);
+  } catch (e) {
+    return null;
+  }
 };
 
 const useParams = () => {
