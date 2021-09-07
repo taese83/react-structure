@@ -30,7 +30,7 @@ const Home = () => {
             Detail
           </button>
         </Box>
-        <Box margin="5px" width="100px">
+        <Box margin="5px" width="220px">
           <button
             onClick={() => {
               dispatch(setData('from Home'));

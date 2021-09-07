@@ -22,20 +22,20 @@ const generateRoutes = (routes) => {
       const stores = route.stores || [];
 
       stores.forEach(async ({ name, slice, saga }) => {
-        if (slice && typeof slice === 'function') {
+        if (slice && slice.lazy && typeof slice === 'function') {
           const asyncSlice = await slice();
           const defaultSlice = asyncSlice?.default;
           defaultSlice && store.injectReducer(name, defaultSlice.reducer);
         }
 
-        if (saga && typeof saga === 'function') {
+        if (saga && saga.lazy && typeof saga === 'function') {
           const asyncSaga = await saga();
           const defaultSaga = asyncSaga?.default;
           defaultSaga && store.injectSaga(name, defaultSaga);
         }
       });
 
-      return route.component();
+      return route.component.lazy && route.component();
     });
 
     return {

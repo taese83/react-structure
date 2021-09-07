@@ -1,20 +1,28 @@
+import { lazy } from 'routers';
+
+const Home = lazy(() => import('./screens/Home'));
+const Detail = lazy(() => import('./screens/Detail'));
+
+const homeSlice = lazy(() => import('./stores/slice'));
+const homeSaga = lazy(() => import('./stores/saga'));
+
 const routes = [
   {
     path: '/',
     params: '',
-    component: () => import('./screens/Home'),
+    component: Home,
     stores: [
       {
         name: 'home',
-        slice: () => import('./stores/slice'),
-        saga: () => import('./stores/saga'),
+        slice: homeSlice,
+        saga: homeSaga,
       },
     ],
   },
   {
     path: 'detail',
     params: '/:id',
-    component: () => import('./screens/Detail'),
+    component: Detail,
   },
 ];
 export default routes;

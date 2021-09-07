@@ -1,13 +1,19 @@
+import { lazy } from 'routers';
+
+const Setting = lazy(() => import('./screens/Setting'));
+const slice = lazy(() => import('./stores/slice'));
+const saga = lazy(() => import('./stores/saga'));
+
 const routes = [
   {
     path: 'setting',
     params: '',
-    component: () => import('./screens/Setting'),
+    component: Setting,
     stores: [
       {
         name: 'setting',
-        slice: () => import('./stores/slice'),
-        saga: () => import('./stores/saga'),
+        slice,
+        saga,
       },
     ],
   },
