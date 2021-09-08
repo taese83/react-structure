@@ -1,4 +1,4 @@
-import { lazy } from 'routers';
+import { lazy } from 'libs';
 
 const Setting = lazy(() => import('./screens/Setting'));
 const slice = lazy(() => import('./stores/slice'));
