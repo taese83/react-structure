@@ -28,20 +28,32 @@ const generateRoutes = (routes) => {
       const stores = route.stores || [];
 
       stores.forEach(async ({ name, slice, saga }) => {
-        if (slice && slice.lazy && typeof slice === 'function') {
-          const asyncSlice = await slice();
-          const defaultSlice = asyncSlice?.default;
-          defaultSlice && store.injectReducer(name, defaultSlice.reducer);
+        if (slice) {
+          if (slice.lazy && typeof slice === 'function') {
+            const asyncSlice = await slice();
+            const defaultSlice = asyncSlice?.default;
+            defaultSlice && store.injectReducer(name, defaultSlice.reducer);
+          } else {
+            store.injectReducer(name, slice.reducer);
+          }
         }
 
-        if (saga && saga.lazy && typeof saga === 'function') {
-          const asyncSaga = await saga();
-          const defaultSaga = asyncSaga?.default;
-          defaultSaga && store.injectSaga(name, defaultSaga);
+        if (saga) {
+          if (saga.lazy && typeof saga === 'function') {
+            const asyncSaga = await saga();
+            const defaultSaga = asyncSaga?.default;
+            defaultSaga && store.injectSaga(name, defaultSaga);
+          } else {
+            store.injectSaga(name, saga);
+          }
         }
       });
 
-      return route.component.lazy && route.component();
+      if (route.component?.lazy) {
+        return route.component();
+      } else {
+        return Promise.resolve(route.component);
+      }
     });
 
     return {
