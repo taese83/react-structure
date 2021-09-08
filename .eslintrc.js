@@ -3,7 +3,11 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+    'react-app',
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -14,6 +18,7 @@ module.exports = {
   plugins: ['react', 'prettier'],
   rules: {
     'no-console': 'off',
+    'import/no-anonymous-default-export': [2, { allowArrowFunction: true }],
     'prettier/prettier': [
       'error',
       {
