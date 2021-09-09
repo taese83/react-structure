@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { cacheAdapterEnhancer } from 'axios-extensions';
-import env from './env';
-import setProxy from './proxy';
-import setIntercepter from './intercepter';
-import { normalize, error } from './response/response';
+import env from '../env';
+import setProxy from '../proxy';
+import setIntercepter from '../intercepter';
+import { normalize, error } from '../response/response';
 
 class Network {
   constructor() {

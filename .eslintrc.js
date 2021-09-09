@@ -18,7 +18,10 @@ module.exports = {
   plugins: ['react', 'prettier'],
   rules: {
     'no-console': 'off',
-    'import/no-anonymous-default-export': [2, { allowArrowFunction: true }],
+    'import/no-anonymous-default-export': [
+      2,
+      { allowArrowFunction: true, allowObject: true },
+    ],
     'prettier/prettier': [
       'error',
       {

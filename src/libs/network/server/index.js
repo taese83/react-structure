@@ -1,3 +1,3 @@
-import ApiServer from './apiserver/server';
+import ApiServer from './api/server';
 
 export { ApiServer };
