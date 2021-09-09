@@ -11,7 +11,6 @@ import shadow from '../base/attr/shadow';
 import size from '../base/attr/size';
 import space from '../base/attr/space';
 import color from '../base/attr/color';
-import media from '../base/attr/media';
 
 // display가 flex일 경우만 동작함
 const center = ({ center }) =>

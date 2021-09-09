@@ -12,7 +12,7 @@ const useInit = () => {
     return () => {
       dispatch(idle());
     };
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (complete || fail) {
@@ -22,7 +22,7 @@ const useInit = () => {
 
   useLayoutEffect(() => {
     initialize();
-  }, []);
+  }, [initialize]);
 
   return {
     initialized,
