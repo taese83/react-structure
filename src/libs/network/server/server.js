@@ -33,7 +33,7 @@ export class Server {
 
   setHeader(header) {
     if (header instanceof Header) {
-      this.header = header;
+      this.header = header.header;
     }
   }
 
