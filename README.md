@@ -7,4 +7,4 @@
 5. simple & extensible network service
 6. common components & libraries.
 
-  - 구조 설계를 위한 프로젝트로 컴포넌트 및 예시 코드(화면)에 대해서는 최적화가 되어 있지 않음..
+  - 단순 구조 설계를 위한 프로젝트로 설계 외적인 요소는 고려하지 않음.
