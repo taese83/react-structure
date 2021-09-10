@@ -9,6 +9,7 @@ export const STACK_NAME = 'history.stack';
 const historyEvent = (location, action) => {
   try {
     const route = matchRoute(location.pathname);
+    console.log(route);
     if (!route) return;
 
     switch (action) {
@@ -19,7 +20,7 @@ const historyEvent = (location, action) => {
         store.dispatch(repl(route.key));
         break;
       case 'POP':
-        store.dispatch(pop());
+        store.dispatch(pop(route.key));
         break;
       default:
         break;

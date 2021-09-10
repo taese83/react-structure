@@ -12,7 +12,9 @@ const generateRoutes = (routes) => {
 
   const genRoutes = routes.map((route) => {
     const key =
-      route.path?.charAt(route.path.length - 1) === '/'
+      route.path.length === 1
+        ? route.path
+        : route.path?.charAt(route.path.length - 1) === '/'
         ? route.path.slice(0, -1)
         : route.path;
     const pks = route.params ? route.params.split('/:').slice(1) : [];

@@ -23,10 +23,20 @@ const initSlice = createSlice({
       newStack[newStack.length - 1] = action.payload;
       state.stack = [...newStack];
     },
-    pop(state) {
+    pop(state, action) {
       state.from = state.stack[state.stack.length - 1];
-      const newStack = [...state.stack];
-      newStack.pop();
+
+      let newStack = [...state.stack];
+      if (!action.payload) {
+        newStack.pop();
+      } else {
+        const index = state.stack.lastIndexOf(action.payload);
+        if (index < 0) {
+          newStack.pop();
+        } else {
+          newStack = state.stack.slice(0, index + 1);
+        }
+      }
       state.stack = [...newStack];
     },
     save() {},
