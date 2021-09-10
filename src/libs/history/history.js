@@ -9,7 +9,6 @@ export const STACK_NAME = 'history.stack';
 const historyEvent = (location, action) => {
   try {
     const route = matchRoute(location.pathname);
-    console.log(route);
     if (!route) return;
 
     switch (action) {
