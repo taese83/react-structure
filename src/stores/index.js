@@ -5,12 +5,11 @@ import {
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import { history } from 'libs/history';
 import global from 'stores/global';
 
 let store;
 const sagaMiddleware = createSagaMiddleware({
-  context: { history }, //history 추가
+  context: {}, //history 추가
 });
 
 function createReducer(asyncReducers = {}) {

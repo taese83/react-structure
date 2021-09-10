@@ -1,3 +1,4 @@
+import { matchPath } from 'react-router';
 import store from 'stores';
 import loadable from 'loadable-components';
 import { renderRoutes as render } from 'react-router-config';
@@ -65,7 +66,7 @@ const generateRoutes = (routes) => {
     };
   });
 
-  $routes = [...$routes, ...genRoutes];
+  $routes = [...genRoutes];
   return genRoutes;
 };
 
@@ -91,6 +92,23 @@ const extractPath = (path, params) => {
   } catch (e) {
     return null;
   }
+};
+
+export const matchRoute = (pathname) => {
+  let findPath = null;
+
+  for (const route of $routes) {
+    const mPath = matchPath(pathname, {
+      path: route.path,
+      exact: true,
+    });
+
+    if (mPath) {
+      findPath = route;
+      break;
+    }
+  }
+  return findPath;
 };
 
 const useParams = () => {
