@@ -38,7 +38,7 @@ export class Server {
   }
 
   request(path, method, queryParams, bodyData, configs) {
-    network.request(
+    return network.request(
       `${this.url}${path}`,
       method,
       this.header,
