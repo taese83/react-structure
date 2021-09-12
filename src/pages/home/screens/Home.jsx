@@ -4,6 +4,8 @@ import Box from 'components/box/Box';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setData, getData, dataSelector } from '../stores/slice';
+import { useTrans } from 'libs/i18n';
+import { change } from 'stores/i18n/slice';
 
 const Data = () => {
   const data = useSelector(dataSelector);
@@ -15,6 +17,7 @@ const Data = () => {
 };
 
 const Home = () => {
+  const { t } = useTrans();
   const dispatch = useDispatch();
 
   const from = useFrom();
@@ -22,7 +25,7 @@ const Home = () => {
 
   return (
     <Box flexDirection="column">
-      <h1>Home 입니다.</h1>
+      <h1>Home 입니다. {t('@hello')}</h1>
       <Box marginTop="10px" center>
         <Box margin="5px">
           <button
@@ -40,6 +43,15 @@ const Home = () => {
             }}
           >
             Detail
+          </button>
+        </Box>
+        <Box margin="5px" width="220px">
+          <button
+            onClick={() => {
+              dispatch(change('en-US'));
+            }}
+          >
+            언어변경
           </button>
         </Box>
         <Box margin="5px" width="220px">

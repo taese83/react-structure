@@ -76,12 +76,25 @@ const renderRoutes = (routes) => {
   return render(routes);
 };
 
-const findRoute = (name) => {
-  return $routes.find((route) => route.key === name);
+const findRoute = (name, params = {}) => {
+  const keys = Object.keys(params);
+  return $routes.find((route) => {
+    if (route.key !== name) {
+      return false;
+    }
+
+    for (let key of keys) {
+      if (!route.paramKeys.find((k) => k.key === key)) {
+        return false;
+      }
+    }
+
+    return true;
+  });
 };
 
 const extractPath = (path, params) => {
-  let route = findRoute(path);
+  let route = findRoute(path, params);
   if (!route) return;
 
   let getParams = {};

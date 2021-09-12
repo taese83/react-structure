@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   complete: false,
   fail: false,
+  data: null,
 };
 
 const initSlice = createSlice({
