@@ -5,9 +5,17 @@ import Box from 'components/box/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData, getData, dataSelector } from '../stores/slice';
 
+const Data = () => {
+  const data = useSelector(dataSelector);
+  return (
+    <Box margin="5px" width="100%">
+      추가한 data : {data}
+    </Box>
+  );
+};
+
 const Home = () => {
   const dispatch = useDispatch();
-  const data = useSelector(dataSelector);
 
   const from = useFrom();
   const stack = useStack();
@@ -52,9 +60,7 @@ const Home = () => {
             add data from server
           </button>
         </Box>
-        <Box margin="5px" width="100%">
-          추가한 data : {data}
-        </Box>
+        <Data />
       </Box>
       <span> from : {from}</span>
       <span> stack : {JSON.stringify(stack)}</span>
