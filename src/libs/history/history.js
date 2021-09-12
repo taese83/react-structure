@@ -1,6 +1,6 @@
 import { extractPath, matchRoute } from 'routers';
 import { createBrowserHistory } from 'history';
-import { stack, save, stackSelector, fromSelector } from 'stores/history/slice';
+import { stack, stackSelector, fromSelector } from 'stores/history/slice';
 import store from 'stores';
 import { useSelector } from 'react-redux';
 
@@ -41,8 +41,6 @@ const historyEvent = (location, action) => {
       default:
         break;
     }
-
-    store.dispatch(save(newStack));
   } catch (e) {
     //do nothing
   }

@@ -6,9 +6,24 @@ import {
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import global from 'stores/global';
+import { SessionStorage } from 'libs/storage';
 
 let store;
 const sagaMiddleware = createSagaMiddleware();
+
+const storageMiddleware = ({ getState }) => {
+  return (next) => (action) => {
+    const result = next(action);
+    SessionStorage.set('states', getState());
+    return result;
+  };
+};
+
+const preloadedState = () => {
+  if (SessionStorage.get('states') !== null) {
+    return SessionStorage.get('states'); // re-hydrate the store
+  }
+};
 
 function createReducer(asyncReducers = {}) {
   return combineReducers({
@@ -45,7 +60,9 @@ const config = {
     }),
     logger,
     sagaMiddleware,
+    storageMiddleware,
   ],
+  preloadedState: preloadedState(),
 };
 
 const createStore = () => {

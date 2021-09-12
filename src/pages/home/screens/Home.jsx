@@ -3,7 +3,7 @@ import { go, useFrom, useStack } from 'libs/history';
 import Box from 'components/box/Box';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setData, dataSelector } from '../stores/slice';
+import { setData, getData, dataSelector } from '../stores/slice';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -37,10 +37,19 @@ const Home = () => {
         <Box margin="5px" width="220px">
           <button
             onClick={() => {
-              dispatch(setData('from Home'));
+              dispatch(setData('from Local'));
             }}
           >
             add data
+          </button>
+        </Box>
+        <Box margin="5px" width="320px">
+          <button
+            onClick={() => {
+              dispatch(getData());
+            }}
+          >
+            add data from server
           </button>
         </Box>
         <Box margin="5px" width="100%">

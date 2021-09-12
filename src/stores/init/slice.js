@@ -19,9 +19,11 @@ const initSlice = createSlice({
       state.loading = true;
     },
     complete(state) {
+      state.loading = false;
       state.complete = true;
     },
     fail(state) {
+      state.loading = false;
       state.fail = true;
     },
   },

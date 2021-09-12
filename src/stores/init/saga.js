@@ -1,20 +1,15 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { init, idle, complete } from './slice';
-import { init as historyInit } from 'stores/history/slice';
-import { SessionStorage } from 'libs/storage';
-
-import { STACK_NAME } from 'libs/history/history';
-
-function* history() {
-  const stack = SessionStorage.get(STACK_NAME) || ['/'];
-  SessionStorage.set(STACK_NAME, stack);
-  yield put(historyInit(stack));
-}
+import { init, complete, fail } from './slice';
 
 function* initTask() {
-  yield history();
-  yield put(complete());
-  yield put(idle());
+  try {
+    /**
+     * 초기화 로직 추가
+     */
+    yield put(complete());
+  } catch (_) {
+    yield put(fail());
+  }
 }
 
 export default function* watch() {

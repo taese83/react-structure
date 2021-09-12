@@ -3,10 +3,9 @@ import initSlice from './init/slice';
 import initSaga from './init/saga';
 
 import historySlice from './history/slice';
-import historySaga from './history/saga';
 
 function* sagas() {
-  yield all([fork(historySaga), fork(initSaga)]);
+  yield all([fork(initSaga)]);
 }
 
 const reducers = {

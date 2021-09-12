@@ -11,14 +11,10 @@ const initSlice = createSlice({
   name,
   initialState,
   reducers: {
-    init(state, { payload }) {
-      state.stack = payload;
-    },
     stack(state, { payload: { stack, from } }) {
       stack && (state.stack = [...stack]);
       from && (state.from = from);
     },
-    save() {},
   },
 });
 
@@ -31,5 +27,5 @@ export const fromSelector = createDraftSafeSelector(
   initState,
   (state) => state?.from,
 );
-export const { init, stack, save } = initSlice.actions;
+export const { stack } = initSlice.actions;
 export default initSlice;
