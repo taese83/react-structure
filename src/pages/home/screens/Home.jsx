@@ -1,5 +1,5 @@
 import React from 'react';
-import { go } from 'libs/history';
+import { go, useFrom, useStack } from 'libs/history';
 import Box from 'components/box/Box';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,10 @@ import { setData, dataSelector } from '../stores/slice';
 const Home = () => {
   const dispatch = useDispatch();
   const data = useSelector(dataSelector);
+
+  const from = useFrom();
+  const stack = useStack();
+
   return (
     <Box flexDirection="column">
       <h1>Home 입니다.</h1>
@@ -43,6 +47,8 @@ const Home = () => {
           추가한 data : {data}
         </Box>
       </Box>
+      <span> from : {from}</span>
+      <span> stack : {JSON.stringify(stack)}</span>
     </Box>
   );
 };

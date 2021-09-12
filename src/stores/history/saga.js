@@ -1,4 +1,4 @@
-import { all, takeEvery } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga/effects';
 import { save } from './slice';
 
 import { STACK_NAME } from 'libs/history/history';
@@ -9,5 +9,5 @@ function* saveStack(actions) {
 }
 
 export default function* watch() {
-  yield all([takeEvery(save, saveStack)]);
+  yield takeEvery(save, saveStack);
 }

@@ -8,9 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import global from 'stores/global';
 
 let store;
-const sagaMiddleware = createSagaMiddleware({
-  context: {}, //history 추가
-});
+const sagaMiddleware = createSagaMiddleware();
 
 function createReducer(asyncReducers = {}) {
   return combineReducers({

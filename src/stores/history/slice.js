@@ -11,33 +11,12 @@ const initSlice = createSlice({
   name,
   initialState,
   reducers: {
-    init(state, action) {
-      state.stack = action.payload;
+    init(state, { payload }) {
+      state.stack = payload;
     },
-    push(state, action) {
-      state.from = state.stack[state.stack.length - 1];
-      state.stack = [...state.stack, action.payload];
-    },
-    replace(state, action) {
-      const newStack = [...state.stack];
-      newStack[newStack.length - 1] = action.payload;
-      state.stack = [...newStack];
-    },
-    pop(state, action) {
-      state.from = state.stack[state.stack.length - 1];
-
-      let newStack = [...state.stack];
-      if (!action.payload) {
-        newStack.pop();
-      } else {
-        const index = state.stack.lastIndexOf(action.payload);
-        if (index < 0) {
-          newStack.pop();
-        } else {
-          newStack = state.stack.slice(0, index + 1);
-        }
-      }
-      state.stack = [...newStack];
+    stack(state, { payload: { stack, from } }) {
+      stack && (state.stack = [...stack]);
+      from && (state.from = from);
     },
     save() {},
   },
@@ -52,5 +31,5 @@ export const fromSelector = createDraftSafeSelector(
   initState,
   (state) => state?.from,
 );
-export const { init, push, replace, pop, save } = initSlice.actions;
+export const { init, stack, save } = initSlice.actions;
 export default initSlice;

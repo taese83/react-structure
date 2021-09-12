@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import propTypes from 'prop-types';
-
-import useInit from 'libs/init/useInit';
+import { useDispatch } from 'react-redux';
+import { idle, init } from 'stores/init/slice';
 
 const InitContext = React.createContext({
   initialized: false,
 });
 
 const Provider = ({ children }) => {
-  const { initialized } = useInit();
+  const dispatch = useDispatch();
 
-  return (
-    <InitContext.Provider value={{ initialized }}>
-      {children}
-    </InitContext.Provider>
-  );
+  useLayoutEffect(() => {
+    dispatch(init());
+    return () => dispatch(idle());
+  });
+
+  return <InitContext.Provider value={{}}>{children}</InitContext.Provider>;
 };
 
 Provider.propTypes = {

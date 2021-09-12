@@ -15,9 +15,8 @@ const initSlice = createSlice({
     idle(state) {
       state.loading = false;
     },
-    init(state, action) {
+    init(state) {
       state.loading = true;
-      state.action = action.payload;
     },
     complete(state) {
       state.complete = true;
@@ -29,5 +28,5 @@ const initSlice = createSlice({
 });
 
 export const initState = (state) => state[name];
-export const { idle, init, complete, fail, webAction } = initSlice.actions;
+export const { idle, init, complete, fail } = initSlice.actions;
 export default initSlice;
