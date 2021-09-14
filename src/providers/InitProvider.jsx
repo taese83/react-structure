@@ -13,9 +13,9 @@ const Provider = ({ children }) => {
   useLayoutEffect(() => {
     dispatch(init());
     return () => dispatch(idle());
-  });
+  }, [dispatch]);
 
-  return <InitContext.Provider value={{}}>{children}</InitContext.Provider>;
+  return <InitContext.Provider value="">{children}</InitContext.Provider>;
 };
 
 Provider.propTypes = {
