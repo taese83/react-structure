@@ -7,6 +7,7 @@ import {
   useRecoilState,
 } from 'recoil';
 
+import { SessionStorage } from 'libs/storage';
 import Status from 'libs/network/core/status';
 
 export const apiStatus = atomFamily({
@@ -17,6 +18,23 @@ export const apiStatus = atomFamily({
 export const apiResponse = atomFamily({
   key: 'apiResponse',
   default: null,
+  effects_UNSTABLE: [
+    (key) =>
+      ({ setSelf, onSet }) => {
+        const savedValue = SessionStorage.get(key);
+        if (savedValue != null) {
+          setSelf(savedValue);
+        }
+
+        onSet((newValue) => {
+          if (newValue === null) {
+            SessionStorage.remove(key);
+          } else {
+            SessionStorage.set(newValue);
+          }
+        });
+      },
+  ],
 });
 
 export const apiError = atomFamily({
@@ -91,14 +109,15 @@ const useNetwork = (
   );
 
   useEffect(() => {
-    resolve && request();
     return () => {
-      setRespnose(null);
       setError(null);
       setStatus(Status.DEFAULT);
     };
     // eslint-disable-next-line
-  }, resolveConditions);
+  }, []);
+
+  // eslint-disable-next-line
+  useEffect(resolve ? request : () => {}, resolveConditions);
 
   return { request, cancel, ...useRecoilValue(apiSelector(key)) };
 };
