@@ -30,7 +30,7 @@ export const apiResponse = atomFamily({
           if (newValue === null) {
             SessionStorage.remove(key);
           } else {
-            SessionStorage.set(newValue);
+            SessionStorage.set(key, newValue);
           }
         });
       },
