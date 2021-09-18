@@ -8,6 +8,7 @@ const size = ({
   minHeight,
   maxHeight,
   boxSizing,
+  bgSize,
 }) => `
   ${width ? `width : ${width};` : ''}
   ${minWidth ? `min-width : ${minWidth};` : ''}
@@ -16,6 +17,7 @@ const size = ({
   ${minHeight ? `min-height : ${minHeight};` : ''}
   ${maxHeight ? `max-height : ${maxHeight};` : ''}
   ${boxSizing ? `box-sizing : ${boxSizing};` : ''}
+  ${bgSize ? `background-size : ${bgSize};` : ''}
 `;
 
 size.propTypes = {
