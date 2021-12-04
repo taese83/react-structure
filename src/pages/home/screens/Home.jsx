@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { go, useFrom, useStack } from 'libs/history';
+import FlexBox from 'components/box/FlexBox';
 import Box from 'components/box/Box';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,9 +12,15 @@ import { change } from 'stores/i18n/slice';
 const Data = () => {
   const data = useSelector(dataSelector);
   return (
-    <Box margin="5px" width="100%">
+    <FlexBox margin="5px" width="100%">
       추가한 data : {data}
-    </Box>
+    </FlexBox>
+  );
+};
+
+const Button = ({ onClick, ...buttonProps }) => {
+  return (
+    <Box component="input" type="button" onClick={onClick} {...buttonProps} />
   );
 };
 
@@ -24,28 +32,24 @@ const Home = () => {
   const stack = useStack();
 
   return (
-    <Box flexDirection="column">
+    <FlexBox flexDirection="column">
       <h1>Home 입니다. {t('@hello')}</h1>
-      <Box marginTop="10px" center>
-        <Box margin="5px">
-          <button
-            onClick={() => {
-              go('setting');
-            }}
-          >
-            Setting
-          </button>
-        </Box>
-        <Box margin="5px">
-          <button
-            onClick={() => {
-              go('detail', { id: 1 });
-            }}
-          >
-            Detail
-          </button>
-        </Box>
-        <Box margin="5px" width="220px">
+      <FlexBox marginTop="10px" center>
+        <Button
+          margin="5px"
+          onClick={() => {
+            go('setting');
+          }}
+          value="Setting"
+        />
+        <Button
+          margin="5px"
+          onClick={() => {
+            go('detail', { id: 1 });
+          }}
+          value="Detail"
+        />
+        <FlexBox margin="5px" width="220px">
           <button
             onClick={() => {
               dispatch(change('en-US'));
@@ -53,8 +57,8 @@ const Home = () => {
           >
             언어변경
           </button>
-        </Box>
-        <Box margin="5px" width="220px">
+        </FlexBox>
+        <FlexBox margin="5px" width="220px">
           <button
             onClick={() => {
               dispatch(setData('from Local'));
@@ -62,8 +66,8 @@ const Home = () => {
           >
             add data
           </button>
-        </Box>
-        <Box margin="5px" width="320px">
+        </FlexBox>
+        <FlexBox margin="5px" width="320px">
           <button
             onClick={() => {
               dispatch(getData());
@@ -71,12 +75,12 @@ const Home = () => {
           >
             add data from server
           </button>
-        </Box>
+        </FlexBox>
         <Data />
-      </Box>
+      </FlexBox>
       <span> from : {from}</span>
       <span> stack : {JSON.stringify(stack)}</span>
-    </Box>
+    </FlexBox>
   );
 };
 

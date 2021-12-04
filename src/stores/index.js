@@ -20,7 +20,7 @@ function createReducer(asyncReducers = {}) {
 
 // Inject Reducer
 function injectReducer(key, asyncReducer) {
-  if (!key) return;
+  if (!key || store.asyncReducers[key]) return;
   store.asyncReducers[key] = asyncReducer;
   store.replaceReducer(createReducer(store.asyncReducers));
   return store;

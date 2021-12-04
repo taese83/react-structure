@@ -12,14 +12,8 @@ import size from '../base/attr/size';
 import space from '../base/attr/space';
 import color from '../base/attr/color';
 
-// display가 flex일 경우만 동작함
-const center = ({ center }) =>
-  center ? 'align-items: center; justify-content: center;' : '';
-
 const BoxContainer = styled.div`
-  display: flex;
   position: relative;
-  align-items: flex-start;
   box-sizing: border-box;
   ${display}
   ${position}
@@ -30,12 +24,11 @@ const BoxContainer = styled.div`
   ${color}
   ${font}
   ${shadow}
-  ${center}
 `;
 
-const Box = ({ component, center, children, ...boxProps }) => {
+const Box = ({ component, children, ...boxProps }) => {
   return (
-    <BoxContainer as={component} center={center} {...boxProps}>
+    <BoxContainer as={component} {...boxProps}>
       {children}
     </BoxContainer>
   );
