@@ -5,11 +5,17 @@ import {
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
+import { persistReducer, persistStore } from 'redux-persist';
+import storageSession from 'redux-persist/lib/storage/session';
 import global from 'stores/global';
 import customMiddleware from './middlewares';
 
 let store;
 const sagaMiddleware = createSagaMiddleware();
+const persistConfig = {
+  key: 'root',
+  storage: storageSession,
+};
 
 function createReducer(asyncReducers = {}) {
   return combineReducers({
@@ -19,10 +25,12 @@ function createReducer(asyncReducers = {}) {
 }
 
 // Inject Reducer
-function injectReducer(key, asyncReducer) {
+function injectReducer(key, asyncReducer, keep) {
   if (!key || store.asyncReducers[key]) return;
   store.asyncReducers[key] = asyncReducer;
-  store.replaceReducer(createReducer(store.asyncReducers));
+  store.replaceReducer(
+    persistReducer(persistConfig, createReducer(store.asyncReducers)),
+  );
   return store;
 }
 
@@ -38,8 +46,10 @@ function injectSaga(runSaga, rootSaga) {
   return injector;
 }
 
+const persistedReducer = persistReducer(persistConfig, createReducer());
+
 const config = {
-  reducer: createReducer(),
+  reducer: persistedReducer,
   middleware: [
     ...getDefaultMiddleware({
       serializableCheck: false,
@@ -59,4 +69,6 @@ const createStore = () => {
   return store;
 };
 
-export default createStore();
+const s = createStore();
+export const persistor = persistStore(s);
+export default s;

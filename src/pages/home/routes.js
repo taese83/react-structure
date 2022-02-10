@@ -16,6 +16,7 @@ const routes = [
         name: 'home',
         slice: homeSlice,
         saga: homeSaga,
+        keep: true,
       },
     ],
   },
