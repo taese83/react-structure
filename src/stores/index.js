@@ -9,13 +9,10 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session';
 import global from 'stores/global';
 import customMiddleware from './middlewares';
+import { SessionStorage } from 'libs/storage';
 
 let store;
 const sagaMiddleware = createSagaMiddleware();
-const persistConfig = {
-  key: 'root',
-  storage: storageSession,
-};
 
 function createReducer(asyncReducers = {}) {
   return combineReducers({
@@ -24,12 +21,29 @@ function createReducer(asyncReducers = {}) {
   });
 }
 
+function makePersisConfig(wl = []) {
+  const savedWhitelist = SessionStorage.get('persist-whitelist') || [];
+  const whitelist = new Set([...savedWhitelist, ...wl]);
+
+  const persistConfig = {
+    key: 'root',
+    storage: storageSession,
+    whitelist: [...whitelist],
+  };
+
+  SessionStorage.set('persist-whitelist', [...whitelist]);
+  return persistConfig;
+}
+
 // Inject Reducer
 function injectReducer(key, asyncReducer, keep) {
-  if (!key || store.asyncReducers[key]) return;
+  if (!key) return;
   store.asyncReducers[key] = asyncReducer;
   store.replaceReducer(
-    persistReducer(persistConfig, createReducer(store.asyncReducers)),
+    persistReducer(
+      makePersisConfig(keep && [key]),
+      createReducer(store.asyncReducers),
+    ),
   );
   return store;
 }
@@ -46,7 +60,10 @@ function injectSaga(runSaga, rootSaga) {
   return injector;
 }
 
-const persistedReducer = persistReducer(persistConfig, createReducer());
+const persistedReducer = persistReducer(
+  makePersisConfig(Object.keys(global.reducers)),
+  createReducer(),
+);
 
 const config = {
   reducer: persistedReducer,
