@@ -1,4 +1,4 @@
 import history from './history';
-import { go, replace, back, useFrom, useStack } from './history';
+import { go, replace, back } from './history';
 
-export { history, go, replace, back, useFrom, useStack };
+export { history, go, replace, back };

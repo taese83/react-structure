@@ -6,7 +6,6 @@ export const storageMiddleware = ({ getState }) => {
     const state = getState();
     SessionStorage.set('store', {
       init: state.init,
-      history: state.history,
       i18n: state.i18n,
     });
     return result;
