@@ -13,7 +13,6 @@ const routes = [
         name: 'setting',
         slice,
         saga,
-        keep: true,
       },
     ],
   },

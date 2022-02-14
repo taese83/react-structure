@@ -44,7 +44,7 @@ module.exports = {
     };
 
     //image 파일을 같은 페이지 폴더에 포함시킨다.
-    conf.module.rules.map((rule) => {
+    conf.module.rules.forEach((rule) => {
       'oneOf' in rule &&
         (rule.oneOf = [
           {

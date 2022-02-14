@@ -30,14 +30,14 @@ const generateRoutes = (routes) => {
     const component = loadable(() => {
       const stores = route.stores || [];
 
-      stores.forEach(async ({ name, slice, saga, keep }) => {
+      stores.forEach(async ({ name, slice, saga, persist }) => {
         if (slice) {
           let reducer = slice.reducer;
           if (slice.lazy) {
             const asyncSlice = await slice();
             reducer = asyncSlice?.default?.reducer;
           }
-          reducer && store.injectReducer(name, reducer, keep);
+          reducer && store.injectReducer(name, reducer, persist);
         }
 
         if (saga) {

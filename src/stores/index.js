@@ -60,10 +60,7 @@ function injectSaga(runSaga, rootSaga) {
   return injector;
 }
 
-const persistedReducer = persistReducer(
-  makePersisConfig(Object.keys(global.reducers)),
-  createReducer(),
-);
+const persistedReducer = persistReducer(makePersisConfig(), createReducer());
 
 const config = {
   reducer: persistedReducer,
@@ -89,3 +86,15 @@ const createStore = () => {
 const s = createStore();
 export const persistor = persistStore(s);
 export default s;
+
+export const globalReducer = async (slice) => {
+  let name = slice.name;
+  let reducer = slice.reducer;
+  if (slice.lazy) {
+    const asyncSlice = await slice();
+
+    name = asyncSlice?.default?.name;
+    reducer = asyncSlice?.default?.reducer;
+  }
+  reducer && store.injectReducer(name, reducer);
+};
