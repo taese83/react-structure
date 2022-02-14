@@ -87,7 +87,7 @@ const s = createStore();
 export const persistor = persistStore(s);
 export default s;
 
-export const globalReducer = async (slice, options) => {
+export const globalReducer = async (slice, options = {}) => {
   let name = options.name || slice.name;
   let reducer = slice.reducer;
   if (slice.lazy) {
