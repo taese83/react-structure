@@ -7,6 +7,11 @@ import { generatePath, useParams as useRouterParams } from 'react-router-dom';
 const EMPTY_PARAM = ' ';
 
 let $routes = [];
+const injectStores = ({ name, slice, saga, persist }) => {
+  store.injectSlice(name, slice, persist);
+  store.injectSaga(name, saga);
+};
+
 const generateRoutes = (routes) => {
   if (!routes) return;
 
@@ -27,29 +32,11 @@ const generateRoutes = (routes) => {
       };
     });
 
+    const stores = route.stores || [];
+    stores.filter(({ global }) => global).forEach(injectStores);
+
     const component = loadable(() => {
-      const stores = route.stores || [];
-
-      stores.forEach(async ({ name, slice, saga, persist }) => {
-        if (slice) {
-          let reducer = slice.reducer;
-          if (slice.lazy) {
-            const asyncSlice = await slice();
-            reducer = asyncSlice?.default?.reducer;
-          }
-          reducer && store.injectReducer(name, reducer, persist);
-        }
-
-        if (saga) {
-          if (saga.lazy) {
-            const asyncSaga = await saga();
-            const defaultSaga = asyncSaga?.default;
-            defaultSaga && store.injectSaga(name, defaultSaga);
-          } else {
-            store.injectSaga(name, saga);
-          }
-        }
-      });
+      stores.filter(({ global }) => !global).forEach(injectStores);
 
       if (route.component?.lazy) {
         return route.component();

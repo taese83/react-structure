@@ -42,7 +42,7 @@ const Home = () => {
         <Button
           margin="5px"
           onClick={() => {
-            go('detail', { id: 1 });
+            go('detail', { id: 1, age: 40 });
           }}
           value="Detail"
         />
