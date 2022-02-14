@@ -2,6 +2,7 @@ import { extractPath } from 'routers';
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
+const EMPTY_PARAM = ' ';
 
 const go = (path, params = {}, options = {}) => {
   if (typeof path !== 'string') return;
@@ -23,3 +24,15 @@ const back = (step = -1) => {
 
 export default history;
 export { go, replace, back };
+
+function reloadUrl({ pathname, state = {} }) {
+  history.replace({
+    pathname: pathname
+      .split('/')
+      .map((path) => (!path ? EMPTY_PARAM : path))
+      .join('/')
+      .trim(),
+    state,
+  });
+}
+reloadUrl(history.location);

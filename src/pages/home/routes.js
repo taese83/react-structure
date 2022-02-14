@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: 'detail',
-    params: '/:name?/:id/:age?',
+    params: '/:id/:name?/:age?',
     component: Detail,
   },
 ];
