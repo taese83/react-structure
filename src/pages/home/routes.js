@@ -1,13 +1,10 @@
 import { lazy } from 'libs';
-import { globalReducer } from 'stores';
 
 const Home = lazy(() => import('./screens/Home'));
 const Detail = lazy(() => import('./screens/Detail'));
 
 const homeSlice = lazy(() => import('./stores/slice'));
 const homeSaga = lazy(() => import('./stores/saga'));
-
-globalReducer(homeSlice);
 
 const routes = [
   {
@@ -20,12 +17,13 @@ const routes = [
         slice: homeSlice,
         saga: homeSaga,
         persist: true,
+        global: true,
       },
     ],
   },
   {
     path: 'detail',
-    params: '/:id',
+    params: '/:name?/:id/:age?',
     component: Detail,
   },
 ];

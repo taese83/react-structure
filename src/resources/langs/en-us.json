@@ -1,5 +1,6 @@
 {
   "ver": 1.0,
+  "langCode": ["en", "en-US"],
   "lng": {
     "@hello": "hello"
   }
