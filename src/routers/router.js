@@ -51,11 +51,6 @@ const generateRoutes = (routes) => {
         }
       });
 
-      // stores가 없을경우 기존 리듀서 유지를 위해 injectReducer 호출
-      if (stores.length === 0) {
-        store.injectReducer(key);
-      }
-
       if (route.component?.lazy) {
         return route.component();
       } else {
