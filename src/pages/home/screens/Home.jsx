@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { go, useFrom, useStack } from 'libs/history';
+import { go } from 'libs/history';
 import FlexBox from 'components/box/FlexBox';
 import Box from 'components/box/Box';
 
@@ -27,9 +27,6 @@ const Button = ({ onClick, ...buttonProps }) => {
 const Home = () => {
   const { t } = useTrans();
   const dispatch = useDispatch();
-
-  const from = useFrom();
-  const stack = useStack();
 
   return (
     <FlexBox flexDirection="column">
@@ -78,8 +75,6 @@ const Home = () => {
         </FlexBox>
         <Data />
       </FlexBox>
-      <span> from : {from}</span>
-      <span> stack : {JSON.stringify(stack)}</span>
     </FlexBox>
   );
 };
