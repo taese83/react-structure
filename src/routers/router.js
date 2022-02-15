@@ -7,21 +7,28 @@ import { generatePath, useParams as useRouterParams } from 'react-router-dom';
 const EMPTY_PARAM = ' ';
 
 let $routes = [];
+
+const isLocal = ({ global }) => !global;
+const isGlobal = ({ global }) => global;
+
 const injectStores = ({ name, slice, saga, persist }) => {
   store.injectSlice(name, slice, persist);
   store.injectSaga(name, saga);
+};
+
+const removeLastPathSeparator = (path) => {
+  if (path.length === 1) return path;
+  if (path.charAt(path.length - 1) === '/') {
+    return path.substring(0, path.length - 1);
+  }
+  return path;
 };
 
 const generateRoutes = (routes) => {
   if (!routes) return;
 
   const genRoutes = routes.map((route) => {
-    const key =
-      route.path.length === 1
-        ? route.path
-        : route.path?.charAt(route.path.length - 1) === '/'
-        ? route.path.slice(0, -1)
-        : route.path;
+    const key = removeLastPathSeparator(route.path);
     const pks = route.params ? route.params.split('/:').slice(1) : [];
     const paramKeys = pks.map((param) => {
       const key = param.replace('?', '');
@@ -33,16 +40,14 @@ const generateRoutes = (routes) => {
     });
 
     const stores = route.stores || [];
-    stores.filter(({ global }) => global).forEach(injectStores);
+    stores.filter(isGlobal).forEach(injectStores);
 
     const component = loadable(() => {
-      stores.filter(({ global }) => !global).forEach(injectStores);
+      stores.filter(isLocal).forEach(injectStores);
 
-      if (route.component?.lazy) {
-        return route.component();
-      } else {
-        return Promise.resolve(route.component);
-      }
+      return route.component?.lazy
+        ? route.component()
+        : Promise.resolve(route.component);
     });
 
     return {
@@ -114,12 +119,9 @@ export const matchRoute = (pathname) => {
 
 const useParams = () => {
   const params = useRouterParams();
-  for (const key in params) {
-    if (params[key] === EMPTY_PARAM) {
-      delete params[key];
-    }
-  }
-  return params;
+  return Object.keys(params)
+    .filter((key) => params[key] !== EMPTY_PARAM)
+    .reduce((pre, key) => ({ ...pre, [key]: params[key] }), {});
 };
 
 export { generateRoutes, renderRoutes, extractPath, useParams };
