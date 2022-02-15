@@ -24,6 +24,8 @@ const routes = [
         name: 'login', //store name 설정, 각 스토어를 구분하기 위한 값, 화면 전체 고유한 값으로 설정
         slice: lazy(() => import('./store/slice')),  // lazy 적용
         saga: lazy(() => import('./store/saga')),  // lazy 적용
+        persist: true // 페이지가 리로드가 되어도 값을 유지해야할 경우 true
+        global: true // reducer가 전역으로 생성되어야 할 경우 설정, 기본은 페이지 단위로 설정됨 --> 페이지를 벗어나면 사라짐
       },
     ],
   },

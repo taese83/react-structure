@@ -46,6 +46,13 @@ const Home = () => {
           }}
           value="Detail"
         />
+        <Button
+          margin="5px"
+          onClick={() => {
+            go('detail/setting', { age: 40, name: 'ted' });
+          }}
+          value="Detail/setting"
+        />
         <FlexBox margin="5px" width="220px">
           <button
             onClick={() => {

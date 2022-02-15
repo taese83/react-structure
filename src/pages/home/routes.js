@@ -23,7 +23,12 @@ const routes = [
   },
   {
     path: 'detail',
-    params: '/:id/:name?/:age?',
+    params: '/:id/:age',
+    component: Detail,
+  },
+  {
+    path: 'detail/setting',
+    params: '/:age/:name?',
     component: Detail,
   },
 ];

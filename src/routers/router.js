@@ -17,7 +17,6 @@ const injectStores = ({ name, slice, saga, persist }) => {
 };
 
 const removeLastPathSeparator = (path) => {
-  if (path.length === 1) return path;
   if (path.charAt(path.length - 1) === '/') {
     return path.substring(0, path.length - 1);
   }

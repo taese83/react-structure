@@ -37,7 +37,7 @@ function makePersisConfig(wl = []) {
 
 // Inject Reducer
 function injectReducer(key, asyncReducer, persist) {
-  if (!key) return;
+  if (!key || store.asyncReducers[key]) return;
   store.asyncReducers[key] = asyncReducer;
   store.replaceReducer(
     persistReducer(
